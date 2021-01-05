@@ -1,0 +1,37 @@
+
+<nav class="navbar navbar-expand-lg navbar-light" style="background-color: #e3f2fd;" >
+  <div "container-fluid justify-content-start">
+      <a class="navbar-brand" href="/">Navbar</a>
+      <a class="btn btn-sm btn-outline-secondary" href="#">Add Field</a>
+      <a class="btn btn-sm btn-outline-secondary" href="#">Edit Field</a>
+      <a class="btn btn-sm btn-outline-secondary" href="#">Delete Field</a>  
+  </div>
+</nav>
+
+<h2 class="text-center">E-customers home page</h2>
+<a class="btn btn-outline-info mb-3" href="/electronics/add">Add User</a>
+{{# if users }}
+
+    <h3>Total Users {{users.length}}</h3>
+    
+    <div class="card d-grid gap-3">
+      {{#each users}}
+          <h5 class="card-header">Name: {{name}}</h5>
+            <div class="card-body">
+              <h5 class="card-title">Email: {{email}}</h5>
+              <h5 class="card-title">Contact: {{phone}}</h5>
+              <h5 class="card-title">Date of Birth: {{birthDay}}</h5>
+              <a href="/electronics/edit/{{_id}}" class="btn btn-primary btn-sm  ">Edit</a>
+              <form action="/electronics/{{_id}}" method="POST" id="delete-form" class="float-start" >
+                <input type="hidden" name="_method"  value="DELETE" >
+                <button class="btn btn-danger btn-sm" type="submit" > Delete </button>
+              </form>
+            </div>
+      {{/each}}  
+    </div>
+
+
+
+{{else}}
+<p>There is no user available</p>
+{{/if}}
