@@ -5,13 +5,16 @@ let app = express();
 let exphbs = require('express-handlebars');
 let db = require('./db/connection');
 let methodOverride = require('method-override');
-//let hbs = exphbs.create()
+let helmet = require('helmet');
 
 
 // views for template engine
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
+
+// basic security
+app.use(helmet());
 
 // body parser middleware
 app.use(express.json());
