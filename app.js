@@ -38,8 +38,9 @@ db.connection();
 app.use(express.static('public'))
 
 // routes 
-app.use('/', require('./routes/index'));
-app.use('/electronics', require('./routes/electronics'))
+app.use('/', require('./routes/index')); // index routes 
+app.use('/electronics', require('./routes/electronics')) // routes for electroics
+app.use('/toys', require('./routes/toyStore'))
 
 
 
