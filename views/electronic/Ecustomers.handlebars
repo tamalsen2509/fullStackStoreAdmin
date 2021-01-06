@@ -20,7 +20,7 @@
             <div class="card-body">
               <h5 class="card-title">Email: {{email}}</h5>
               <h5 class="card-title">Contact: {{phone}}</h5>
-              <h5 class="card-title">Date of Birth: {{birthDay}}</h5>
+              <h5 class="card-title">Date of Birth: {{ formatDate birthDay 'MMM Do YYYY' }}</h5>
               <a href="/electronics/edit/{{_id}}" class="btn btn-primary btn-sm">Edit</a>
               <form action="/electronics/{{_id}}" method="POST" id="delete-form" class="float-start" >
                 <input type="hidden" name="_method"  value="DELETE" >
