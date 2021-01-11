@@ -1,6 +1,4 @@
 let mongoose = require('mongoose');
-//let moment = require('moment');
-
 
 
 let userSchema = new mongoose.Schema({
@@ -10,8 +8,7 @@ let userSchema = new mongoose.Schema({
     },
     email: {
         type: String,
-        required: true,
-        unique : true
+        required: true
     },
     phone: {
         type : Number

@@ -13,7 +13,7 @@ exports.connection = async () => {
         });
         console.log('connected to mongodb')
     } catch (e) {
-        console.log('Error noted at db/connection' + e);
+        console.log('Error noted at db/connection' , e);
     }
     
 }
