@@ -10,10 +10,10 @@ route.get('/',  async (req, res) => {
         let users = await User.find({
             account: 'Toy Store'
         }).lean()
-        res.render('toyStore/toymain' ,{ users } )
+        res.render('toyStore/toymain' ,{ users , title : "Toy-Store home page"  } )
             
     } catch (e) {
-        console.log('Error at routes/electronics/get /', e)
+        console.log('Error at routes/toys/get /', e)
         res.render('error/404')
     }
     
@@ -39,9 +39,13 @@ route.post('/add', async (req, res) => {
         account: req.body.sector
     }
     try {        
+        
+        // if user found in db model restrict user to create a duplicate entry
         let user = await User.findOne({
-            email : req.body.email
+            email: { "$in": req.body.email },
+            account : {"$in" : req.body.sector }
         });
+        // if user not found then create a new user
         if (!user) {
             let newUser = await User.create(userdata)
             res.render('msg/success')    
@@ -49,28 +53,61 @@ route.post('/add', async (req, res) => {
             res.render('msg/userCreated')
         }   
     } catch (e) {
-        console.log('error at routes/electronic/post/add', e)
+        console.log('error at routes/toys/post/add', e)
         res.render('error/404')
     }
 
 })
 
 
-route.get('/edit/:id', async (req, res) => {
-    
+// edit routes to modify user details & displaying edit form
+// routes @ /toys/edit/:id method get
+route.get('/edit/:id', async (req, res) => {    
     try {
-
         let user = await User.findOne({ _id: req.params.id }).lean();
         if (!user) {
             res.render('error/500')
         } else {
             res.render('toyStore/edit_form' , {title:"Edit/Change  desired fields " , user  } )
         }
-
-    } catch (error) {
-        console.log('error occured at routes/electronics/get/edit/id' , error )
+    } catch (e) {
+        console.log('error occured at routes/toys/get/edit/id' , e)
     }
 })
+
+
+// edit routes to modify user details
+// routes @ /toys/edit/:id method put
+route.put('/:id', async (req, res) => {
+    try {
+        let user = await User.findById( req.params.id ).lean();
+        if (!user) {
+            res.render('error/404')
+        } else {
+             user = await User.findByIdAndUpdate({
+                _id : req.params.id
+            }, req.body, { new : true , runValidators : true  } )
+        }
+        res.redirect('/toys')
+
+    } catch (e) {
+        console.log('Error at routes/toys/put', e)
+        res.redirect('error/500')
+    }
+})
+
+
+route.delete('/:id', async (req, res) => {
+    try {
+        await User.deleteOne({ _id: req.params.id })
+        res.redirect('/toys')
+    } catch (e) {
+        console.log('error at routes/toys/delete', e);
+        res.render('error/500')
+    }
+})
+
+
 
 
 

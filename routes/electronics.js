@@ -71,8 +71,8 @@ route.get('/edit/:id', async (req, res) => {
             res.render('electronic/edit_form' , {title:"Edit/Change  desired fields " , user  } )
         }
 
-    } catch (error) {
-        console.log('error occured at routes/electronics/get/edit/id' , error )
+    } catch (e) {
+        console.log('error occured at routes/electronics/get/edit/id' , e )
     }
 })
 
@@ -88,8 +88,8 @@ route.put('/:id', async (req, res) => {
         }
         res.redirect('/electronics')
 
-    } catch (error) {
-        console.log('Error at routes/electronics/put', error)
+    } catch (e) {
+        console.log('Error at routes/electronics/put', e)
         res.redirect('error/500')
     }
 })
@@ -99,8 +99,8 @@ route.delete('/:id', async (req, res) => {
     try {
         await User.deleteOne({ _id: req.params.id })
         res.redirect('/electronics')
-    } catch (err) {
-        console.log('error at routes/electronics/delete', err);
+    } catch (e) {
+        console.log('error at routes/electronics/delete', e);
         res.render('error/500')
     }
 })

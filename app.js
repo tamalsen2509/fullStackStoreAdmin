@@ -25,6 +25,7 @@ app.use(express.json());
 app.use(express.urlencoded({extended : false}))
 
 // method override middleware
+//Ref:   https://www.npmjs.com/package/method-override
 app.use(methodOverride(function (req, res) {
     if (req.body && typeof req.body === 'object' && '_method' in req.body) {
       // look in urlencoded POST bodies and delete it
@@ -44,7 +45,7 @@ app.use(express.static('public'))
 // routes 
 app.use('/', require('./routes/index')); // index routes 
 app.use('/electronics', require('./routes/electronics')) // routes for electroics
-app.use('/toys', require('./routes/toyStore'))
+app.use('/toys', require('./routes/toyStore')) // route for toy store
 
 
 
