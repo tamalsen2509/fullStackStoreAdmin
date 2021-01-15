@@ -18,7 +18,7 @@ app.set('view engine', 'handlebars');
 
 
 // basic security
-app.use(helmet());
+//app.use(helmet());
 
 // body parser middleware
 app.use(express.json());
