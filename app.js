@@ -5,7 +5,7 @@ let app = express();
 let exphbs = require('express-handlebars');
 let db = require('./db/connection');
 let methodOverride = require('method-override');
-//let helmet = require('helmet');
+let helmet = require('helmet');
 
 //Handlebars helper method
 
@@ -18,7 +18,7 @@ app.set('view engine', 'handlebars');
 
 
 // basic security
-//app.use(helmet());
+app.use(helmet());
 
 // body parser middleware
 app.use(express.json());
