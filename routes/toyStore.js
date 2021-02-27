@@ -1,6 +1,9 @@
 let express = require('express');
 let route = express.Router();
-let User = require('../model/userModel')
+let User = require('../model/userModel');
+
+
+
 
 // diplay all customer list in toy store
 //path /toys/ @method get
